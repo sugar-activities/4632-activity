@@ -1,0 +1,6 @@
+[Activity]
+name = WikipediaQU
+activity_version = 35
+bundle_id = org.laptop.WikipediaActivityQU
+icon = activity-wikipedia-qu
+exec = sugar-activity activity_qu.WikipediaActivityQU

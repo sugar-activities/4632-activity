@@ -1,0 +1,33 @@
+import os
+import sqlite3
+import codecs
+
+class GenerateMeta:
+	def run(self):
+
+		os.chdir("/home/kartik/Sugar/sugar-build/install/share/sugar/activities/WikipediaHI.activity/hi")
+		dbpath = 'kartik.db'
+		if os.path.exists(dbpath):
+			print "search.db exists!"
+		else:
+			print "Unable to find search.db"
+		conn = sqlite3.connect(dbpath)
+		conn.cursor()
+		rows=conn.execute("select title from articles")
+		f= codecs.open('output', encoding='utf-8', mode='w+')		
+		s=""
+		cnt=0
+		for row in rows:	
+			#if cnt>500:
+			#	break;
+			try:
+				print "checking ",row[0]
+				title=row[0].replace("_"," ")
+				s=s+"<a href='/wiki/"+row[0]+"' title='"+title+"'>"+title+"</a></br>"+"\n"
+			except:
+				print "error"		
+			cnt=cnt+1
+		f.write(s)
+		f.close()
+g=GenerateMeta()
+g.run()
